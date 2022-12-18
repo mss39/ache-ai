@@ -6,6 +6,7 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,11 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AcheAi"
         tools:targetApi="31">
+
         <activity
-            android:name=".LoginActivity"
+            android:name=".CadastroAnuncioActivity"
             android:exported="false" />
         <activity
-            android:name=".ListViewAnuncios"
+            android:name=".AnunciosHome"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,4 +32,5 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
