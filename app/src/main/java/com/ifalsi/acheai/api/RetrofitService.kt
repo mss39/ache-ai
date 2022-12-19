@@ -11,17 +11,17 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
-    @GET("list-anuncios.json?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2NzExNDc4ODYsImV4cCI6MTY3MTE1MTQ4NiwibmJmIjoxNjcxMTQ3ODg2LCJqdGkiOiIxbmExOW1WQnA5MGJGdUt5Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.IpuGW0isczpNaq1OKHok6tJsjHhRWRdMpBrq4CzrM88/")
+    @GET("/anuncios")
     fun getAllAnuncios() : Call<List<Anuncio>>
 
-    @POST("announces?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2NzExNDc4ODYsImV4cCI6MTY3MTE1MTQ4NiwibmJmIjoxNjcxMTQ3ODg2LCJqdGkiOiIxbmExOW1WQnA5MGJGdUt5Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.IpuGW0isczpNaq1OKHok6tJsjHhRWRdMpBrq4CzrM88/")
+    @POST("/anuncios")
     fun newAnuncio(@Body anuncio: Anuncio) : Call<ResponseBody>
     companion object{
 
         private val retrofitService : RetrofitService by lazy {
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.108.37/api/")
+                .baseUrl("http://192.168.1.9:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 

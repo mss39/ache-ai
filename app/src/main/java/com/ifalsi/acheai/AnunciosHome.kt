@@ -1,5 +1,6 @@
 package com.ifalsi.acheai
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,7 @@ class AnunciosHome : AppCompatActivity() {
 
     private val retrofitService = RetrofitService.getInstance()
 
-    private val adapter = AnuncioListAdapter{
+    private var adapter = AnuncioListAdapter{
 
     }
 
@@ -34,7 +35,11 @@ class AnunciosHome : AppCompatActivity() {
             AnuncioViewModel::class.java
         )
 
-        binding.recyclerview.adapter = adapter
+        this.adapter = AnuncioListAdapter {
+            startActivity(Intent(this,AnuncioDetalhes::class.java))
+        }
+        binding.recyclerview.adapter = this.adapter
+
     }
 
     override fun onStart() {
@@ -49,6 +54,7 @@ class AnunciosHome : AppCompatActivity() {
             Log.i("MK1",it)
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
+
     }
 
     override fun onResume() {

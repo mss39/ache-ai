@@ -2,6 +2,8 @@ package com.ifalsi.acheai
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.ifalsi.acheai.api.RetrofitService
 import com.ifalsi.acheai.databinding.ActivityCadastroAnuncioBinding
@@ -53,16 +55,24 @@ class CadastroAnuncioActivity : AppCompatActivity() {
                     editTextCadastroRecompensa.requestFocus()
                     return@setOnClickListener
                 }
+                if (spinnerCategoria.selectedItemPosition == 0){
+                    spinnerCategoria.requestFocus()
+                    return@setOnClickListener
+                }
 
                 val newAnuncio = Anuncio(
                     titulo = editTextCadastroTitulo.text.toString(),
                     descricao = editTextCadastroDescricao.text.toString(),
                     endereco = editTextCadastroEndereco.text.toString(),
                     recompensa = editTextCadastroRecompensa.text.toString().toDouble(),
-                    categoria = "Celular",
+                    categoria = spinnerCategoria.adapter.getItem(spinnerCategoria.selectedItemPosition) as String,
                     status = "Perdido"
                 )
 
+                editTextCadastroTitulo.text.clear()
+                editTextCadastroDescricao.text.clear()
+                editTextCadastroEndereco.text.clear()
+                editTextCadastroRecompensa.text.clear()
                 viewModel.saveAnuncio(newAnuncio)
 
             }
