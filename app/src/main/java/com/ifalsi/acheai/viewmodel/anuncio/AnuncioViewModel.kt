@@ -1,6 +1,5 @@
 package com.ifalsi.acheai.viewmodel.anuncio
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ifalsi.acheai.models.Anuncio

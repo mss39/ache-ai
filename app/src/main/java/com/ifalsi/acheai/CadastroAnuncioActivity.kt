@@ -2,8 +2,6 @@ package com.ifalsi.acheai
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.ifalsi.acheai.api.RetrofitService
 import com.ifalsi.acheai.databinding.ActivityCadastroAnuncioBinding
@@ -61,11 +59,11 @@ class CadastroAnuncioActivity : AppCompatActivity() {
                 }
 
                 val newAnuncio = Anuncio(
-                    titulo = editTextCadastroTitulo.text.toString(),
-                    descricao = editTextCadastroDescricao.text.toString(),
-                    endereco = editTextCadastroEndereco.text.toString(),
-                    recompensa = editTextCadastroRecompensa.text.toString().toDouble(),
-                    categoria = spinnerCategoria.adapter.getItem(spinnerCategoria.selectedItemPosition) as String,
+                    title = editTextCadastroTitulo.text.toString(),
+                    description = editTextCadastroDescricao.text.toString(),
+                    address = editTextCadastroEndereco.text.toString(),
+                    reward = editTextCadastroRecompensa.text.toString().toDouble(),
+                    category = spinnerCategoria.adapter.getItem(spinnerCategoria.selectedItemPosition) as String,
                     status = "Perdido"
                 )
 

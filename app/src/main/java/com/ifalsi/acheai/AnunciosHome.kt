@@ -13,6 +13,10 @@ import com.ifalsi.acheai.databinding.ActivityAnunciosHomeBinding
 import com.ifalsi.acheai.repositories.AnunciosListRepository
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModel
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class AnunciosHome : AppCompatActivity() {
 
@@ -35,8 +39,10 @@ class AnunciosHome : AppCompatActivity() {
             AnuncioViewModel::class.java
         )
 
-        this.adapter = AnuncioListAdapter {
-            startActivity(Intent(this,AnuncioDetalhes::class.java))
+        this.adapter = AnuncioListAdapter { anuncio ->
+            var intent = Intent(this,AnuncioDetalhes::class.java)
+            intent.putExtra("anuncio", anuncio)
+            startActivity(intent)
         }
         binding.recyclerview.adapter = this.adapter
 

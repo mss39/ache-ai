@@ -3,7 +3,6 @@ package com.ifalsi.acheai.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ifalsi.acheai.R
 import com.ifalsi.acheai.databinding.ItemListAnunciosBinding
@@ -26,8 +25,12 @@ class AnuncioListAdapter(private val onItemClicked: (Anuncio) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: AnuncioViewHolder, position: Int) {
-        val anuncio = anuncios[position]
-        holder.bind(anuncio,onItemClicked)
+
+        when(holder){
+            is AnuncioViewHolder -> {
+                holder.bind(anuncios[position], onItemClicked)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -42,9 +45,9 @@ class AnuncioViewHolder(val binding: ItemListAnunciosBinding) : RecyclerView.Vie
     fun bind(anuncio: Anuncio, onItemClicked: (Anuncio) -> Unit) {
 
         binding.apply {
-            txtItemAnuncioValor.text = "R$ ${anuncio.recompensa}"
-            txtItemTitulo.text = anuncio.titulo
-            txtItemAnuncioEndereco.text = anuncio.endereco
+            txtItemAnuncioValor.text = "R$ ${anuncio.reward}"
+            txtItemTitulo.text = anuncio.title
+            txtItemAnuncioEndereco.text = anuncio.address
         }
 
 
