@@ -18,6 +18,7 @@ class LoginViewModel constructor(private val userRepository: UserRepository) : V
     fun login(loginRequest: LoginRequest) {
 
         val request = userRepository.login(loginRequest)
+
         request.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
 

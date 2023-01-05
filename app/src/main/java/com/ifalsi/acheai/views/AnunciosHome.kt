@@ -1,22 +1,22 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.ifalsi.acheai.R
 import com.ifalsi.acheai.adapters.AnuncioListAdapter
 import com.ifalsi.acheai.api.RetrofitService
 import com.ifalsi.acheai.databinding.ActivityAnunciosHomeBinding
+import com.ifalsi.acheai.models.Anuncio
+import com.ifalsi.acheai.models.UserSession
 import com.ifalsi.acheai.repositories.AnunciosListRepository
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModel
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AnunciosHome : AppCompatActivity() {
 
@@ -25,8 +25,8 @@ class AnunciosHome : AppCompatActivity() {
 
     private val retrofitService = RetrofitService.getInstance()
 
-    private var adapter = AnuncioListAdapter{
-
+    private var adapter = AnuncioListAdapter{ anuncio ->
+        openAnuncio(anuncio)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,33 +39,54 @@ class AnunciosHome : AppCompatActivity() {
             AnuncioViewModel::class.java
         )
 
-        this.adapter = AnuncioListAdapter { anuncio ->
-            var intent = Intent(this,AnuncioDetalhes::class.java)
+        setupUI()
+
+        adapter = AnuncioListAdapter { anuncio ->
+            var intent = Intent(this, AnuncioDetalhes::class.java)
             intent.putExtra("anuncio", anuncio)
             startActivity(intent)
         }
-        binding.recyclerview.adapter = this.adapter
+
 
     }
 
+    private fun setupUI(){
+        binding.recyclerview.adapter = adapter
+    }
     override fun onStart() {
         super.onStart()
 
-        viewModel.listAnuncio.observe(this, Observer { anuncios->
-            Log.i("MK1","OnStart")
-            adapter.setAnuncioList(anuncios)
+        viewModel.listAnuncio?.observe(this, Observer { anuncios ->
+            updateListAnuncios(anuncios)
         })
 
         viewModel.errorMessage.observe(this, Observer {
             Log.i("MK1",it)
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            updateListAnuncios(listOf())
         })
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAllAnuncios()
+        viewModel.getAllAnuncios(UserSession.getToken())
+    }
+
+    private fun updateListAnuncios(anuncios: List<Anuncio>){
+
+        adapter.setAnuncioList(anuncios)
+        binding.apply {
+            if(anuncios.isEmpty()){
+                recyclerview.visibility = View.GONE
+            }else{
+                recyclerview.visibility = View.VISIBLE
+            }
+        }
+
+    }
+    private fun openAnuncio(anuncio: Anuncio) {
+
     }
 }
 

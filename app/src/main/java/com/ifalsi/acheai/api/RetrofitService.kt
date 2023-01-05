@@ -10,27 +10,28 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface RetrofitService {
 
     @GET("/anuncios")
-    fun getAllAnuncios() : Call<List<Anuncio>>
+    fun getAllAnuncios(@Header("Authorization") auth: String): Call<List<Anuncio>>
 
     @POST("/anuncios")
-    fun newAnuncio(@Body anuncio: Anuncio) : Call<ResponseBody>
+    fun newAnuncio(@Header("Authorization") auth: String, @Body anuncio: Anuncio) : Call<ResponseBody>
 
-    @POST("register")
+    @POST("/api/usuario")
     fun saveUser(@Body user: User): Call<ResponseBody>
 
-    @POST("login")
+    @POST("/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
     companion object{
 
         private val retrofitService : RetrofitService by lazy {
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.108.119:8080")
+                .baseUrl("http://192.168.1.12:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 

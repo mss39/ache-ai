@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ifalsi.acheai.api.RetrofitService
 import com.ifalsi.acheai.databinding.ActivityCadastroAnuncioBinding
 import com.ifalsi.acheai.models.Anuncio
+import com.ifalsi.acheai.models.UserSession
 import com.ifalsi.acheai.repositories.AnunciosListRepository
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModel
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModelFactory
@@ -71,7 +72,7 @@ class CadastroAnuncioActivity : AppCompatActivity() {
                 editTextCadastroDescricao.text.clear()
                 editTextCadastroEndereco.text.clear()
                 editTextCadastroRecompensa.text.clear()
-                viewModel.saveAnuncio(newAnuncio)
+                viewModel.saveAnuncio(UserSession.getToken(), newAnuncio)
 
             }
 

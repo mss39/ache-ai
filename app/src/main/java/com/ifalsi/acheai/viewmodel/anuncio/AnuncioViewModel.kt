@@ -12,12 +12,12 @@ import retrofit2.Response
 class AnuncioViewModel constructor(private val anunciosListRepository: AnunciosListRepository):
     ViewModel() {
 
-    val listAnuncio = MutableLiveData<List<Anuncio>>()
+    val listAnuncio: MutableLiveData<List<Anuncio>>? by lazy { MutableLiveData<List<Anuncio>>() }
     val status = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    fun saveAnuncio(anuncio: Anuncio){
-        val request = anunciosListRepository.saveAnuncio(anuncio)
+    fun saveAnuncio(token: String, anuncio: Anuncio){
+        val request = anunciosListRepository.saveAnuncio(token, anuncio)
         request.enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 status.postValue(response.code() == 200)
@@ -33,13 +33,13 @@ class AnuncioViewModel constructor(private val anunciosListRepository: AnunciosL
     }
 
 
-    fun getAllAnuncios(){
+    fun getAllAnuncios(token: String){
 
-        val request = anunciosListRepository.getAllAnuncios()
+        val request = anunciosListRepository.getAllAnuncios(token)
 
         request.enqueue(object : Callback<List<Anuncio>>{
             override fun onResponse(call: Call<List<Anuncio>>, response: Response<List<Anuncio>>) {
-                listAnuncio.postValue(response.body())
+                listAnuncio?.postValue(response.body())
             }
 
             override fun onFailure(call: Call<List<Anuncio>>, t: Throwable) {

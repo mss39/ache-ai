@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

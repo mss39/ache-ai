@@ -5,7 +5,7 @@ import com.ifalsi.acheai.models.Anuncio
 
 class AnunciosListRepository constructor(private val retrofitService: RetrofitService) {
 
-    fun getAllAnuncios() = retrofitService.getAllAnuncios()
+    fun getAllAnuncios(token : String) = retrofitService.getAllAnuncios(token)
 
-    fun saveAnuncio(anuncio: Anuncio) = retrofitService.newAnuncio(anuncio)
+    fun saveAnuncio(token : String,anuncio: Anuncio) = retrofitService.newAnuncio(token, anuncio)
 }
