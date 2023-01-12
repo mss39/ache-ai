@@ -3,10 +3,10 @@ package com.ifalsi.acheai.models
 import java.io.Serializable
 
 data class Anuncio(
-    val title : String,
-    val description : String,
+    val titulo : String,
+    val descricao : String,
     val status : String,
-    val address : String,
-    val category : String,
-    val reward : Double
+    val endereco : String,
+    val categoria : String,
+    val recompensa : Double
 ) : Serializable

@@ -45,9 +45,9 @@ class AnuncioViewHolder(val binding: ItemListAnunciosBinding) : RecyclerView.Vie
     fun bind(anuncio: Anuncio, onItemClicked: (Anuncio) -> Unit) {
 
         binding.apply {
-            txtItemAnuncioValor.text = "R$ ${anuncio.reward}"
-            txtItemTitulo.text = anuncio.title
-            txtItemAnuncioEndereco.text = anuncio.address
+            txtItemAnuncioValor.text = "R$ ${anuncio.recompensa}"
+            txtItemTitulo.text = anuncio.titulo
+            txtItemAnuncioEndereco.text = anuncio.endereco
         }
 
 

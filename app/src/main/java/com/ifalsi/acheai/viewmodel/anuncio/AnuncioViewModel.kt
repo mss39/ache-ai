@@ -1,5 +1,6 @@
 package com.ifalsi.acheai.viewmodel.anuncio
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ifalsi.acheai.models.Anuncio
@@ -16,10 +17,11 @@ class AnuncioViewModel constructor(private val anunciosListRepository: AnunciosL
     val status = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    fun saveAnuncio(anuncio: Anuncio){
-        val request = anunciosListRepository.saveAnuncio(anuncio)
+    fun saveAnuncio(token: String, anuncio: Anuncio){
+        val request = anunciosListRepository.saveAnuncio(token, anuncio)
         request.enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.i("mk1","foi")
                 status.postValue(response.code() == 200)
             }
 
@@ -33,9 +35,9 @@ class AnuncioViewModel constructor(private val anunciosListRepository: AnunciosL
     }
 
 
-    fun getAllAnuncios(){
+    fun getAllAnuncios(token : String){
 
-        val request = anunciosListRepository.getAllAnuncios()
+        val request = anunciosListRepository.getAllAnuncios(token)
 
         request.enqueue(object : Callback<List<Anuncio>>{
             override fun onResponse(call: Call<List<Anuncio>>, response: Response<List<Anuncio>>) {

@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ifalsi.acheai.api.RetrofitService
-import com.ifalsi.acheai.databinding.ActivityLoginBinding
 import com.ifalsi.acheai.databinding.ActivityMainBinding
 import com.ifalsi.acheai.models.LoginRequest
 import com.ifalsi.acheai.models.UserSession
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.success.observe(this, Observer {
 
-            UserSession.setToken(it.token)
+            UserSession.setToken("Bearer " + it.token)
             startActivity(Intent(this@MainActivity, AnunciosHome::class.java))
             finish()
 

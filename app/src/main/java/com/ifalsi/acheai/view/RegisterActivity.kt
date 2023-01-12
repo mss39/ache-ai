@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -71,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                 )
             )
 
-            Toast.makeText(this@RegisterActivity, "Cadastro com Sucesso", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@RegisterActivity, "Cadastro com Sucesso", Toast.LENGTH_LONG).show()
 
         }
 
@@ -80,8 +80,8 @@ class RegisterActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.status.observe(this, Observer {
-            if (it) {
+        viewModel.status.observe(this, Observer { status->
+            if (status) {
                 Toast.makeText(
                     this,
                     "Usuário registrado com sucesso!",

@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,10 +17,10 @@ class AnuncioDetalhes : AppCompatActivity() {
         val anuncio = intent.getSerializableExtra("anuncio") as Anuncio
 
         binding.apply {
-            txtDetalhesTitulo.text = anuncio.title
-            txtDetalhesDescricao.text = anuncio.description
-            txtDetalhesEndereco.text = anuncio.address
-            txtDetalhesValor.text = "R$ ${anuncio.reward}"
+            txtDetalhesTitulo.text = anuncio.titulo
+            txtDetalhesDescricao.text = anuncio.descricao
+            txtDetalhesEndereco.text = anuncio.endereco
+            txtDetalhesValor.text = "R$ ${anuncio.recompensa}"
         }
 
     }

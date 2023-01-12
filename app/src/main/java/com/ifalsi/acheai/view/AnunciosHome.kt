@@ -1,4 +1,4 @@
-package com.ifalsi.acheai
+package com.ifalsi.acheai.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,16 +7,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.ifalsi.acheai.R
 import com.ifalsi.acheai.adapters.AnuncioListAdapter
 import com.ifalsi.acheai.api.RetrofitService
 import com.ifalsi.acheai.databinding.ActivityAnunciosHomeBinding
+import com.ifalsi.acheai.models.UserSession
 import com.ifalsi.acheai.repositories.AnunciosListRepository
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModel
 import com.ifalsi.acheai.viewmodel.anuncio.AnuncioViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AnunciosHome : AppCompatActivity() {
 
@@ -39,8 +37,11 @@ class AnunciosHome : AppCompatActivity() {
             AnuncioViewModel::class.java
         )
 
+        binding.fabNewRecipe.setOnClickListener {
+            startActivity(Intent(this, CadastroAnuncioActivity::class.java))
+        }
         this.adapter = AnuncioListAdapter { anuncio ->
-            var intent = Intent(this,AnuncioDetalhes::class.java)
+            var intent = Intent(this, AnuncioDetalhes::class.java)
             intent.putExtra("anuncio", anuncio)
             startActivity(intent)
         }
@@ -51,21 +52,21 @@ class AnunciosHome : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.listAnuncio.observe(this, Observer { anuncios->
+        viewModel.listAnuncio.observe(this, Observer { anuncios ->
             Log.i("MK1","OnStart")
             adapter.setAnuncioList(anuncios)
         })
 
         viewModel.errorMessage.observe(this, Observer {
             Log.i("MK1",it)
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+
         })
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAllAnuncios()
+        viewModel.getAllAnuncios(UserSession.getToken())
     }
 }
 

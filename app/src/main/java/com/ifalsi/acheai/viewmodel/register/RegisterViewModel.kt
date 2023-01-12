@@ -20,7 +20,7 @@ class RegisterViewModel constructor(private val repository: UserRepository) : Vi
         request.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
 
-                if (response.code() == HttpURLConnection.HTTP_OK) {
+                if (response.code() == HttpURLConnection.HTTP_CREATED) {
                     status.postValue(true)
                 } else {
                     status.postValue(false)

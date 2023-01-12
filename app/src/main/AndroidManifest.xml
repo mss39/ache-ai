@@ -17,22 +17,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.AnuncioDetalhes"
             android:exported="false" />
         <activity
-            android:name=".AnuncioDetalhes"
+            android:name=".view.AnunciosHome"
             android:exported="false" />
         <activity
-            android:name=".CadastroAnuncioActivity"
+            android:name=".view.CadastroAnuncioActivity"
             android:exported="false" />
         <activity
-            android:name=".AnunciosHome"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
